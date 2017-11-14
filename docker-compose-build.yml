@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    build: ../app
+    environment:
+      - MONGO_URL: "mongodb://@mongo:27017/test"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+  mongodb:
+    image: mongo:3.5
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles
+

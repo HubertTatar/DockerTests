@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    image: test/app:0.0.1
+    ports:
+      - "8090:8090"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_URI="mongodb://mongodb/${MONGO_INITDB_DATABASE}"
+  mongodb:
+    image: mongo:3.5
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
